@@ -132,8 +132,8 @@ function renderUtilizationTrend() {
         {
           label: "Family Medicine",
           data: UTILIZATION_TRENDS.map((d) => d.famMed != null ? +(d.famMed * 100).toFixed(1) : null),
-          borderColor: "#059669",
-          backgroundColor: "rgba(5,150,105,0.1)",
+          borderColor: "#22D3EE",
+          backgroundColor: "rgba(34,211,238,0.15)",
           tension: 0.3,
           pointRadius: 3,
           spanGaps: false,
@@ -141,8 +141,8 @@ function renderUtilizationTrend() {
         {
           label: "Internal Medicine",
           data: UTILIZATION_TRENDS.map((d) => d.intMed != null ? +(d.intMed * 100).toFixed(1) : null),
-          borderColor: "#2563EB",
-          backgroundColor: "rgba(37,99,235,0.1)",
+          borderColor: "#A3E635",
+          backgroundColor: "rgba(163,230,53,0.15)",
           tension: 0.3,
           pointRadius: 3,
           spanGaps: false,
@@ -150,8 +150,8 @@ function renderUtilizationTrend() {
         {
           label: "Cardiology",
           data: UTILIZATION_TRENDS.map((d) => d.cardiology != null ? +(d.cardiology * 100).toFixed(1) : null),
-          borderColor: "#D97706",
-          backgroundColor: "rgba(217,119,6,0.1)",
+          borderColor: "#F59E0B",
+          backgroundColor: "rgba(245,158,11,0.15)",
           tension: 0.3,
           pointRadius: 3,
           spanGaps: false,
@@ -159,8 +159,8 @@ function renderUtilizationTrend() {
         {
           label: "Orthopedics",
           data: UTILIZATION_TRENDS.map((d) => d.ortho != null ? +(d.ortho * 100).toFixed(1) : null),
-          borderColor: "#DC2626",
-          backgroundColor: "rgba(220,38,38,0.1)",
+          borderColor: "#FB7185",
+          backgroundColor: "rgba(251,113,133,0.15)",
           tension: 0.3,
           pointRadius: 3,
           spanGaps: false,
@@ -172,7 +172,22 @@ function renderUtilizationTrend() {
       maintainAspectRatio: false,
       interaction: { intersect: false, mode: "index" },
       plugins: {
-        legend: { position: "bottom", labels: { usePointStyle: true, padding: 16, font: { size: 11 } } },
+        legend: {
+          position: "bottom",
+          labels: {
+            usePointStyle: true,
+            padding: 16,
+            font: { size: 11 },
+            color: "#B0BDD1",
+          },
+        },
+        tooltip: {
+          backgroundColor: "rgba(12,19,34,0.95)",
+          borderColor: "rgba(34,211,238,0.4)",
+          borderWidth: 1,
+          titleColor: "#E2E8F0",
+          bodyColor: "#B0BDD1",
+        },
         annotation: undefined,
       },
       scales: {
@@ -182,11 +197,12 @@ function renderUtilizationTrend() {
           ticks: {
             callback: (v) => v + "%",
             font: { size: 11 },
+            color: "#B0BDD1",
           },
-          grid: { color: "rgba(0,0,0,0.04)" },
+          grid: { color: "rgba(148,163,184,0.15)" },
         },
         x: {
-          ticks: { font: { size: 11 } },
+          ticks: { font: { size: 11 }, color: "#B0BDD1" },
           grid: { display: false },
         },
       },
@@ -198,15 +214,15 @@ function renderUtilizationTrend() {
           const { ctx, chartArea, scales } = chart;
           const y = scales.y.getPixelForValue(60);
           ctx.save();
-          ctx.strokeStyle = "rgba(100,116,139,0.4)";
+          ctx.strokeStyle = "rgba(148,163,184,0.45)";
           ctx.lineWidth = 1;
           ctx.setLineDash([6, 4]);
           ctx.beginPath();
           ctx.moveTo(chartArea.left, y);
           ctx.lineTo(chartArea.right, y);
           ctx.stroke();
-          ctx.fillStyle = "rgba(100,116,139,0.6)";
-          ctx.font = "10px -apple-system, sans-serif";
+          ctx.fillStyle = "rgba(176,189,209,0.8)";
+          ctx.font = "10px Manrope, sans-serif";
           ctx.fillText("60% target", chartArea.right - 60, y - 6);
           ctx.restore();
         },
@@ -232,19 +248,19 @@ function renderDeptComparison() {
         {
           label: "Utilization %",
           data: activeDepts.map((d) => +(d.utilizationRate * 100).toFixed(1)),
-          backgroundColor: "#2563EB",
+          backgroundColor: "#22D3EE",
           borderRadius: 4,
         },
         {
           label: "Same-Day Note Close %",
           data: activeDepts.map((d) => d.sameDayNoteClose != null ? +(d.sameDayNoteClose * 100).toFixed(1) : 0),
-          backgroundColor: "#059669",
+          backgroundColor: "#A3E635",
           borderRadius: 4,
         },
         {
           label: "NPS",
           data: activeDepts.map((d) => d.npsScore || 0),
-          backgroundColor: "#D97706",
+          backgroundColor: "#F59E0B",
           borderRadius: 4,
         },
       ],
@@ -253,16 +269,31 @@ function renderDeptComparison() {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { position: "bottom", labels: { usePointStyle: true, padding: 16, font: { size: 11 } } },
+        legend: {
+          position: "bottom",
+          labels: {
+            usePointStyle: true,
+            padding: 16,
+            font: { size: 11 },
+            color: "#B0BDD1",
+          },
+        },
+        tooltip: {
+          backgroundColor: "rgba(12,19,34,0.95)",
+          borderColor: "rgba(34,211,238,0.4)",
+          borderWidth: 1,
+          titleColor: "#E2E8F0",
+          bodyColor: "#B0BDD1",
+        },
       },
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { size: 11 } },
-          grid: { color: "rgba(0,0,0,0.04)" },
+          ticks: { font: { size: 11 }, color: "#B0BDD1" },
+          grid: { color: "rgba(148,163,184,0.15)" },
         },
         x: {
-          ticks: { font: { size: 11 } },
+          ticks: { font: { size: 11 }, color: "#B0BDD1" },
           grid: { display: false },
         },
       },
